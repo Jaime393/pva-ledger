@@ -1,0 +1,9 @@
+name: PVA ledger
+on: [push]
+jobs:
+  pva:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install click requests
+      - run: python cli.py publish README.md --zenodo
