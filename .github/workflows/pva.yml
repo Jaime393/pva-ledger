@@ -5,5 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install click requests
-      - run: python cli.py publish README.md --zenodo
+      - run: python3 -m unittest discover -s tests -v
+      - run: python3 cli.py record README.md
