@@ -1,19 +1,15 @@
-# pva-ledger V202 — rho(x)>0
+# pva-ledger
 
-Registro inmutable de contribuciones — Arweave + Zenodo DOI — credito inmediato.
+Recibos locales de contenido con SHA-256 y comprobación de bytes. Esta revisión elimina las transacciones Arweave simuladas, DOIs inventados mediante `hash()` y el “OK inmutable” sin verificación.
 
 ```bash
-pip install -r requirements.txt
-python cli.py publish paper.pdf --zenodo
-python cli.py verify <sha256>
+python3 cli.py record README.md --output receipt.json
+python3 cli.py verify receipt.json --file README.md
+python3 -m unittest discover -s tests -v
 ```
 
-Flujo:
-1. Calcula SHA256 paper/prueba
-2. Sube hash a Arweave (testnet gratis, mainnet ~0.01 AR)
-3. Genera DOI via Zenodo sandbox (gratis)
-4. Asocia timestamp + hash + autor
+Solo biblioteca estándar, sin red ni credenciales. El recibo declara `external_publication=not_performed`; un checksum no prueba autoría, timestamp confiable ni almacenamiento inmutable.
 
-Salida: `paper.pdf.pva-ledger.json` con tx Arweave + DOI.
+La salida existente no se sobrescribe. `--timestamp` permite un recibo reproducible y debe ser UTC; `--producer` es una declaración, no una identidad autenticada.
 
-Parte de PVA ecosistema — Bloque 4 memoria inmutable — credito inmediato.
+El comando histórico `publish --zenodo` ya no fabrica publicaciones. Para publicar externamente se necesita un conector autorizado y lectura de retorno con un identificador real, fuera de este contrato.

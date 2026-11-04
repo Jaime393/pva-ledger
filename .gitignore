@@ -1,2 +1,5 @@
 *.tar.gz
 *.pva-ledger.json
+__pycache__/
+*.py[cod]
+receipt.json
